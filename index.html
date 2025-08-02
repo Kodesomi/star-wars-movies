@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Star Wars Movie Explorer</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Star Wars Movie Explorer</h1>
-      <input type="text" id="searchInput" placeholder="Search movies..." />
-      <label class="theme-switch">
-        <input type="checkbox" id="toggleTheme">
-        <span class="slider"></span>
-      </label>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Star Wars Explorer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Star Wars Movie Explorer</h1>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+  </header>
 
-    <div id="loader" class="loader hidden"></div>
+  <section id="hero-quote">
+    <blockquote>
+      “Do. Or do not. There is no try.” – Yoda
+    </blockquote>
+  </section>
 
-    <section id="moviesGrid" class="grid-container"></section>
+  <section class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for a Star Wars movie..." />
+  </section>
 
-    <section class="extra-section" id="trending">
-      <h2>Trending Now</h2>
-      <div class="trending-container" id="trendingContainer"></div>
-    </section>
+  <div id="loader" class="loader hidden"></div>
 
-    <section class="extra-section" id="spotlight">
-      <h2>Director's Spotlight</h2>
-      <div class="spotlight-card">
-        <p><strong>George Lucas</strong></p>
-        <p>Creator of the original Star Wars trilogy and a visionary filmmaker.</p>
-      </div>
-    </section>
+  <main id="movieContainer" class="movie-container">
+    <!-- Movies will be injected here -->
+  </main>
 
-    <section class="extra-section" id="quotes">
-      <h2>Quotes from the Galaxy</h2>
-      <blockquote id="quoteBlock">"Do. Or do not. There is no try." – Yoda</blockquote>
-    </section>
+  <div id="pagination" class="pagination">
+    <button id="prevBtn">Previous</button>
+    <span id="pageNumber">Page 1</span>
+    <button id="nextBtn">Next</button>
+  </div>
 
-    <footer>
-      <p>&copy; 2025 Star Wars Movie Explorer. Built with the SWAPI API.</p>
-    </footer>
+  <footer>
+    <p>© 2025 Star Wars Fan Project by Kodesomi</p>
+  </footer>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
 
 

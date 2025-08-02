@@ -1,103 +1,102 @@
-
-const apiUrl = 'https://swapi.dev/api/films/';
-const movieList = document.getElementById('movie-list');
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
+const movieContainer = document.getElementById('movieContainer');
+const searchInput = document.getElementById('searchInput');
 const loader = document.getElementById('loader');
-const toggleThemeButton = document.getElementById('toggle-theme');
-const paginationContainer = document.getElementById('pagination');
+const pageNumber = document.getElementById('pageNumber');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const themeToggle = document.getElementById('theme-toggle');
 
+let allMovies = [];
+let filteredMovies = [];
 let currentPage = 1;
 const itemsPerPage = 3;
-let allMovies = [];
+
+// Dark Mode Toggle
+if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark-mode');
+}
+
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+});
 
 // Show loader
 function showLoader() {
-  loader.style.display = 'block';
+  loader.classList.remove('hidden');
 }
 
 // Hide loader
 function hideLoader() {
-  loader.style.display = 'none';
+  loader.classList.add('hidden');
 }
 
-// Fetch movies from API
+function renderMovies(movies) {
+  movieContainer.innerHTML = '';
+  if (movies.length === 0) {
+    movieContainer.innerHTML = '<p>No movies found.</p>';
+    return;
+  }
+
+  const start = (currentPage - 1) * itemsPerPage;
+  const paginatedMovies = movies.slice(start, start + itemsPerPage);
+
+  paginatedMovies.forEach((movie, index) => {
+    const movieCard = document.createElement('div');
+    movieCard.className = 'movie-card';
+    movieCard.innerHTML = `
+      <img src="https://via.placeholder.com/300x200?text=${encodeURIComponent(movie.title)}" alt="${movie.title}" />
+      <h3>${movie.title}</h3>
+      <p><strong>Director:</strong> ${movie.director}</p>
+      <p><strong>Release:</strong> ${movie.release_date}</p>
+      <p><strong>Episode:</strong> ${movie.episode_id}</p>
+    `;
+    movieContainer.appendChild(movieCard);
+  });
+
+  pageNumber.textContent = `Page ${currentPage}`;
+}
+
+searchInput.addEventListener('input', () => {
+  const searchValue = searchInput.value.toLowerCase();
+  filteredMovies = allMovies.filter(movie =>
+    movie.title.toLowerCase().includes(searchValue)
+  );
+  currentPage = 1;
+  renderMovies(filteredMovies);
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderMovies(filteredMovies);
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  const maxPage = Math.ceil(filteredMovies.length / itemsPerPage);
+  if (currentPage < maxPage) {
+    currentPage++;
+    renderMovies(filteredMovies);
+  }
+});
+
 async function fetchMovies() {
-  showLoader();
   try {
-    const response = await fetch(apiUrl);
+    showLoader();
+    const response = await fetch('https://swapi.dev/api/films/');
     const data = await response.json();
-    allMovies = data.results;
-    renderMovies(allMovies, currentPage);
-    setupPagination(allMovies);
+    allMovies = data.results.sort((a, b) => a.episode_id - b.episode_id);
+    filteredMovies = allMovies;
+    renderMovies(filteredMovies);
   } catch (error) {
-    console.error('Error fetching movies:', error);
+    movieContainer.innerHTML = '<p>Failed to load movies. Try again later.</p>';
   } finally {
     hideLoader();
   }
 }
 
-// Render movie list
-function renderMovies(movies, page) {
-  movieList.innerHTML = '';
-  const start = (page - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const paginatedMovies = movies.slice(start, end);
-
-  paginatedMovies.forEach((movie, index) => {
-    const card = document.createElement('div');
-    card.className = 'movie-card';
-    card.innerHTML = `
-      <img src="https://via.placeholder.com/150x200?text=Star+Wars" alt="Movie Poster">
-      <div class="movie-title">${movie.title}</div>
-      <div class="movie-details">
-        <strong>Episode:</strong> ${movie.episode_id}<br>
-        <strong>Director:</strong> ${movie.director}<br>
-        <strong>Release:</strong> ${movie.release_date}
-      </div>
-    `;
-    movieList.appendChild(card);
-  });
-}
-
-// Setup pagination buttons
-function setupPagination(movies) {
-  paginationContainer.innerHTML = '';
-  const pageCount = Math.ceil(movies.length / itemsPerPage);
-  for (let i = 1; i <= pageCount; i++) {
-    const btn = document.createElement('button');
-    btn.innerText = i;
-    btn.classList.add('page-btn');
-    if (i === currentPage) btn.classList.add('active');
-    btn.addEventListener('click', () => {
-      currentPage = i;
-      renderMovies(allMovies, currentPage);
-      setupPagination(allMovies);
-    });
-    paginationContainer.appendChild(btn);
-  }
-}
-
-// Search functionality
-searchButton.addEventListener('click', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = allMovies.filter(movie => movie.title.toLowerCase().includes(query));
-  currentPage = 1;
-  renderMovies(filtered, currentPage);
-  setupPagination(filtered);
-});
-
-// Dark/light theme toggle
-function toggleTheme() {
-  document.body.classList.toggle('dark-theme');
-  toggleThemeButton.textContent = document.body.classList.contains('dark-theme') ? 'Light Mode' : 'Dark Mode';
-}
-
-toggleThemeButton.addEventListener('click', toggleTheme);
-
-// Initial fetch
 fetchMovies();
-
 
 
 
