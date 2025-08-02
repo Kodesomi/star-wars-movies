@@ -8,19 +8,40 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #0f0f0f;
   color: #ffffff;
-  padding: 20px;
+  padding: 0;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to right, #1e1e1e, #121212);
+  padding: 60px 20px;
+  text-align: center;
+  color: #ffffff;
+  border-bottom: 2px solid #ff4757;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  color: #ff4757;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  color: #ccc;
 }
 
 .app-container {
   max-width: 960px;
   margin: 0 auto;
   text-align: center;
+  padding: 30px 20px;
 }
 
-h1 {
+h2 {
   margin-bottom: 20px;
-  font-size: 2.5rem;
-  color: #ff4757;
+  font-size: 2rem;
+  color: #ff6b81;
 }
 
 .search-section {
