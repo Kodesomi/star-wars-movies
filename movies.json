@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "title": "A New Hope",
+      "episode_id": 4,
+      "opening_crawl": "It is a period of civil war. Rebel spaceships, striking from a hidden base...",
+      "release_date": "1977-05-25"
+    },
+    {
+      "title": "The Empire Strikes Back",
+      "episode_id": 5,
+      "opening_crawl": "It is a dark time for the Rebellion. Although the Death Star has been destroyed...",
+      "release_date": "1980-05-17"
+    },
+    {
+      "title": "Return of the Jedi",
+      "episode_id": 6,
+      "opening_crawl": "Luke Skywalker has returned to his home planet of Tatooine...",
+      "release_date": "1983-05-25"
+    },
+    {
+      "title": "The Phantom Menace",
+      "episode_id": 1,
+      "opening_crawl": "Turmoil has engulfed the Galactic Republic. The taxation of trade routes...",
+      "release_date": "1999-05-19"
+    },
+    {
+      "title": "Attack of the Clones",
+      "episode_id": 2,
+      "opening_crawl": "There is unrest in the Galactic Senate. Several thousand solar systems...",
+      "release_date": "2002-05-16"
+    },
+    {
+      "title": "Revenge of the Sith",
+      "episode_id": 3,
+      "opening_crawl": "War! The Republic is crumbling under attacks by the ruthless Sith Lord...",
+      "release_date": "2005-05-19"
+    },
+    {
+      "title": "The Force Awakens",
+      "episode_id": 7,
+      "opening_crawl": "Luke Skywalker has vanished. In his absence, the sinister FIRST ORDER has risen...",
+      "release_date": "2015-12-11"
+    }
+  ]
+}
