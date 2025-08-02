@@ -3,44 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Star Wars Explorer</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Star Wars Movies</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Star Wars Movie Explorer</h1>
-    <button id="theme-toggle">Toggle Dark Mode</button>
+    <h1>Star Wars Movies</h1>
+    <form id="search-form">
+      <input type="text" id="search-input" placeholder="Search for a movie..." />
+      <button type="submit">Search</button>
+    </form>
   </header>
 
-  <section id="hero-quote">
-    <blockquote>
-      “Do. Or do not. There is no try.” – Yoda
-    </blockquote>
-  </section>
-
-  <section class="search-container">
-    <input type="text" id="searchInput" placeholder="Search for a Star Wars movie..." />
-  </section>
-
-  <div id="loader" class="loader hidden"></div>
-
-  <main id="movieContainer" class="movie-container">
-    <!-- Movies will be injected here -->
-  </main>
-
-  <div id="pagination" class="pagination">
-    <button id="prevBtn">Previous</button>
-    <span id="pageNumber">Page 1</span>
-    <button id="nextBtn">Next</button>
-  </div>
-
-  <footer>
-    <p>© 2025 Star Wars Fan Project by Kodesomi</p>
-  </footer>
+  <main id="movies-grid"></main>
 
   <script src="script.js"></script>
 </body>
 </html>
-
 
 
